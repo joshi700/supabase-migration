@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import '../styles/LeadsList.css';
@@ -12,15 +12,7 @@ function LeadsList({ user, onLogout }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
 
-  useEffect(() => {
-    fetchLeads();
-  }, []);
-
-  useEffect(() => {
-    filterLeads();
-  }, [searchTerm, statusFilter, leads]);
-
-  const fetchLeads = async () => {
+  const fetchLeads = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.get(`${API_URL}/leads`, {
@@ -32,9 +24,9 @@ function LeadsList({ user, onLogout }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const filterLeads = () => {
+  const filterLeads = useCallback(() => {
     let filtered = leads;
 
     if (statusFilter !== 'All') {
@@ -51,7 +43,15 @@ function LeadsList({ user, onLogout }) {
     }
 
     setFilteredLeads(filtered);
-  };
+  }, [leads, searchTerm, statusFilter]);
+
+  useEffect(() => {
+    fetchLeads();
+  }, [fetchLeads]);
+
+  useEffect(() => {
+    filterLeads();
+  }, [filterLeads]);
 
   const getStatusBadgeClass = (status) => {
     const statusMap = {

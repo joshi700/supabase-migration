@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import TimelineView from './TimelineView';
@@ -20,17 +20,7 @@ function BrokerDashboard({ user, onLogout }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
 
-  useEffect(() => {
-    if (activeTab === 'overview') {
-      fetchLeads();
-    }
-  }, [activeTab]);
-
-  useEffect(() => {
-    filterLeads();
-  }, [searchTerm, statusFilter, leads]);
-
-  const fetchLeads = async () => {
+  const fetchLeads = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.get(`${API_URL}/leads`, {
@@ -53,9 +43,9 @@ function BrokerDashboard({ user, onLogout }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const filterLeads = () => {
+  const filterLeads = useCallback(() => {
     let filtered = leads;
 
     if (statusFilter !== 'All') {
@@ -72,7 +62,17 @@ function BrokerDashboard({ user, onLogout }) {
     }
 
     setFilteredLeads(filtered);
-  };
+  }, [leads, searchTerm, statusFilter]);
+
+  useEffect(() => {
+    if (activeTab === 'overview') {
+      fetchLeads();
+    }
+  }, [activeTab, fetchLeads]);
+
+  useEffect(() => {
+    filterLeads();
+  }, [filterLeads]);
 
   const getStatusBadgeClass = (status) => {
     const statusMap = {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import TimelineCard from '../components/TimelineCard';
 import TimelineDetailModal from '../components/TimelineDetailModal';
@@ -14,11 +14,7 @@ function TimelineView({ user }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedLead, setSelectedLead] = useState(null);
 
-  useEffect(() => {
-    fetchTimelineData();
-  }, []);
-
-  const fetchTimelineData = async () => {
+  const fetchTimelineData = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       // Use /api/leads - the correct endpoint that works for both admin and broker
@@ -32,7 +28,11 @@ function TimelineView({ user }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchTimelineData();
+  }, [fetchTimelineData]);
 
   const calculateStats = (leadsData) => {
     // Calculate timeline statistics based on leads data
@@ -62,11 +62,6 @@ function TimelineView({ user }) {
     });
 
     setStats(stats);
-  };
-
-  const fetchStats = async () => {
-    // Stats are now calculated in fetchTimelineData
-    // This function can be removed or used for additional stats if needed
   };
 
   const getFilteredLeads = () => {
