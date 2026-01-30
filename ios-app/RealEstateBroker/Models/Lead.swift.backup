@@ -1,0 +1,151 @@
+import Foundation
+
+struct Lead: Identifiable, Codable {
+    let id: String
+    let leadID: String
+    let brokerEmail: String
+    let clientName: String
+    let propertyAddress: String
+    let status: LeadStatus
+    let lastUpdated: Date
+    
+    // Expected dates
+    let expectedOfferAcceptDate: Date?
+    let expectedTitleDate: Date?
+    let expectedInspectionOrderDate: Date?
+    let expectedInspectionCompleteDate: Date?
+    let expectedAppraisalOrderDate: Date?
+    let expectedAppraisalCompleteDate: Date?
+    let expectedClearToCloseDate: Date?
+    let expectedClosingScheduledDate: Date?
+    let expectedCloseDate: Date?
+    
+    // Actual dates
+    let actualOfferAcceptDate: Date?
+    let actualTitleDate: Date?
+    let actualInspectionOrderDate: Date?
+    let actualInspectionCompleteDate: Date?
+    let actualAppraisalOrderDate: Date?
+    let actualAppraisalCompleteDate: Date?
+    let actualClearToCloseDate: Date?
+    let actualClosingScheduledDate: Date?
+    let actualCloseDate: Date?
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case leadID = "Lead ID"
+        case brokerEmail = "Broker Email"
+        case clientName = "Client Name"
+        case propertyAddress = "Property Address"
+        case status = "Status"
+        case lastUpdated = "Last Updated"
+        case expectedOfferAcceptDate = "Expected Offer Accept Date"
+        case expectedTitleDate = "Expected Title Date"
+        case expectedInspectionOrderDate = "Expected Inspection Order Date"
+        case expectedInspectionCompleteDate = "Expected Inspection Complete Date"
+        case expectedAppraisalOrderDate = "Expected Appraisal Order Date"
+        case expectedAppraisalCompleteDate = "Expected Appraisal Complete Date"
+        case expectedClearToCloseDate = "Expected Clear to Close Date"
+        case expectedClosingScheduledDate = "Expected Closing Scheduled Date"
+        case expectedCloseDate = "Expected Close Date"
+        case actualOfferAcceptDate = "Actual Offer Accept Date"
+        case actualTitleDate = "Actual Title Date"
+        case actualInspectionOrderDate = "Actual Inspection Order Date"
+        case actualInspectionCompleteDate = "Actual Inspection Complete Date"
+        case actualAppraisalOrderDate = "Actual Appraisal Order Date"
+        case actualAppraisalCompleteDate = "Actual Appraisal Complete Date"
+        case actualClearToCloseDate = "Actual Clear to Close Date"
+        case actualClosingScheduledDate = "Actual Closing Scheduled Date"
+        case actualCloseDate = "Actual Close Date"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try container.decode(String.self, forKey: .id)
+        leadID = try container.decode(String.self, forKey: .leadID)
+        brokerEmail = try container.decode(String.self, forKey: .brokerEmail)
+        clientName = try container.decode(String.self, forKey: .clientName)
+        propertyAddress = try container.decode(String.self, forKey: .propertyAddress)
+        status = try container.decode(LeadStatus.self, forKey: .status)
+        
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        // Parse lastUpdated
+        if let lastUpdatedString = try? container.decode(String.self, forKey: .lastUpdated),
+           let date = dateFormatter.date(from: lastUpdatedString) {
+            lastUpdated = date
+        } else {
+            lastUpdated = Date()
+        }
+        
+        // Helper function to parse optional date strings
+        func parseDate(_ key: CodingKeys) -> Date? {
+            guard let dateString = try? container.decode(String.self, forKey: key),
+                  !dateString.isEmpty else {
+                return nil
+            }
+            return dateFormatter.date(from: dateString)
+        }
+        
+        // Expected dates
+        expectedOfferAcceptDate = parseDate(.expectedOfferAcceptDate)
+        expectedTitleDate = parseDate(.expectedTitleDate)
+        expectedInspectionOrderDate = parseDate(.expectedInspectionOrderDate)
+        expectedInspectionCompleteDate = parseDate(.expectedInspectionCompleteDate)
+        expectedAppraisalOrderDate = parseDate(.expectedAppraisalOrderDate)
+        expectedAppraisalCompleteDate = parseDate(.expectedAppraisalCompleteDate)
+        expectedClearToCloseDate = parseDate(.expectedClearToCloseDate)
+        expectedClosingScheduledDate = parseDate(.expectedClosingScheduledDate)
+        expectedCloseDate = parseDate(.expectedCloseDate)
+        
+        // Actual dates
+        actualOfferAcceptDate = parseDate(.actualOfferAcceptDate)
+        actualTitleDate = parseDate(.actualTitleDate)
+        actualInspectionOrderDate = parseDate(.actualInspectionOrderDate)
+        actualInspectionCompleteDate = parseDate(.actualInspectionCompleteDate)
+        actualAppraisalOrderDate = parseDate(.actualAppraisalOrderDate)
+        actualAppraisalCompleteDate = parseDate(.actualAppraisalCompleteDate)
+        actualClearToCloseDate = parseDate(.actualClearToCloseDate)
+        actualClosingScheduledDate = parseDate(.actualClosingScheduledDate)
+        actualCloseDate = parseDate(.actualCloseDate)
+    }
+}
+
+enum LeadStatus: String, Codable {
+    case new = "New"
+    case processing = "Processing"
+    case inspection = "Inspection"
+    case appraisal = "Appraisal"
+    case clearToClose = "Clear to Close"
+    case closing = "Closing"
+    case closed = "Closed"
+    case cancelled = "Cancelled"
+    
+    var color: String {
+        switch self {
+        case .new: return "blue"
+        case .processing: return "orange"
+        case .inspection: return "purple"
+        case .appraisal: return "indigo"
+        case .clearToClose: return "green"
+        case .closing: return "teal"
+        case .closed: return "gray"
+        case .cancelled: return "red"
+        }
+    }
+}
+
+// Timeline milestone structure
+struct TimelineMilestone: Identifiable {
+    let id = UUID()
+    let title: String
+    let expectedDate: Date?
+    let actualDate: Date?
+    let isCompleted: Bool
+    
+    var displayDate: Date? {
+        actualDate ?? expectedDate
+    }
+}

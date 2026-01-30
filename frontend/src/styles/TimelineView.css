@@ -1,0 +1,155 @@
+.timeline-view {
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.timeline-header {
+  margin-bottom: 30px;
+}
+
+.timeline-header h1 {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.timeline-header p {
+  color: #666;
+  font-size: 16px;
+}
+
+/* Stats Bar */
+.timeline-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.stat-card-small {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid;
+}
+
+.stat-card-small.total { border-left-color: #667eea; }
+.stat-card-small.ontrack { border-left-color: #10b981; }
+.stat-card-small.warning { border-left-color: #f59e0b; }
+.stat-card-small.critical { border-left-color: #ef4444; }
+.stat-card-small.overdue { border-left-color: #991b1b; }
+
+.stat-card-small .stat-icon {
+  font-size: 32px;
+}
+
+.stat-card-small .stat-info h3 {
+  font-size: 28px;
+  color: #333;
+  margin: 0 0 4px 0;
+}
+
+.stat-card-small .stat-info p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+/* Filters */
+.timeline-filters {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-group label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.filter-group select {
+  padding: 10px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  min-width: 200px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.filter-group select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.search-group {
+  flex: 1;
+  min-width: 300px;
+}
+
+.search-group input {
+  width: 100%;
+  padding: 10px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.search-group input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Timeline Cards List */
+.timeline-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.loading, .empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .timeline-view {
+    padding: 20px;
+  }
+
+  .timeline-stats-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group select {
+    width: 100%;
+  }
+}

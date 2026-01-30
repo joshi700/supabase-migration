@@ -1,0 +1,479 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  max-width: 1200px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px 30px 20px;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.modal-header h2 {
+  font-size: 24px;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.modal-header .property-address {
+  color: #666;
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.modal-header .current-status {
+  font-size: 14px;
+  color: #666;
+  margin: 8px 0 0 0;
+}
+
+.close-button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #f3f4f6;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #666;
+}
+
+.close-button:hover {
+  background: #e5e7eb;
+  color: #333;
+}
+
+/* Alert Banner */
+.alert-banner {
+  margin: 20px 30px;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.alert-banner.warning {
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+}
+
+.alert-banner.critical {
+  background: #fecaca;
+  border-left: 4px solid #ef4444;
+}
+
+.alert-banner.overdue {
+  background: #fee2e2;
+  border-left: 4px solid #991b1b;
+}
+
+.alert-banner .alert-icon {
+  font-size: 32px;
+}
+
+.alert-banner h4 {
+  font-size: 16px;
+  margin: 0 0 4px 0;
+  color: #333;
+}
+
+.alert-banner p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+/* Quick Stats */
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 20px 30px;
+}
+
+.stat-box {
+  background: #f9fafb;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Large Timeline Section */
+.large-timeline-section {
+  padding: 30px;
+  background: #f9fafb;
+}
+
+.large-timeline-section h3 {
+  font-size: 18px;
+  color: #333;
+  margin: 0 0 24px 0;
+  text-align: center;
+  font-weight: 700;
+}
+
+.large-timeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 20px 0;
+  gap: 0;
+}
+
+.large-milestone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+  position: relative;
+}
+
+.large-milestone-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  border: 4px solid;
+  transition: all 0.3s;
+}
+
+.large-milestone.completed .large-milestone-circle {
+  background: #10b981;
+  border-color: #10b981;
+  color: white;
+}
+
+.large-milestone.current .large-milestone-circle {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+.large-milestone.warning .large-milestone-circle {
+  background: white;
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.large-milestone.critical .large-milestone-circle {
+  background: white;
+  border-color: #ef4444;
+  color: #ef4444;
+  animation: pulse 2s infinite;
+}
+
+.large-milestone.overdue .large-milestone-circle {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: white;
+  animation: shake 0.5s infinite;
+}
+
+.large-milestone.pending .large-milestone-circle {
+  background: white;
+  border-color: #d1d5db;
+  color: #9ca3af;
+}
+
+.large-milestone-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.large-milestone-dates {
+  text-align: center;
+  font-size: 12px;
+}
+
+.large-milestone-dates .actual-date {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.large-milestone-dates .expected-date {
+  color: #666;
+  font-style: italic;
+}
+
+.variance-indicator {
+  font-size: 11px;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.variance-indicator.early { color: #10b981; }
+.variance-indicator.late { color: #ef4444; }
+.variance-indicator.on-time { color: #3b82f6; }
+
+.large-connector {
+  width: 60px;
+  height: 4px;
+  margin: 0 -10px;
+  margin-top: -50px;
+  position: relative;
+  z-index: -1;
+}
+
+.large-connector.completed {
+  background: #10b981;
+}
+
+.large-connector.pending {
+  background: #d1d5db;
+}
+
+/* Milestone Details Table */
+.milestone-details-section {
+  padding: 30px;
+}
+
+.milestone-details-section h3 {
+  font-size: 18px;
+  color: #333;
+  margin: 0 0 20px 0;
+  font-weight: 700;
+}
+
+.milestone-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.milestone-table thead {
+  background: #f9fafb;
+}
+
+.milestone-table th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  font-size: 13px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.milestone-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.milestone-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.milestone-table .milestone-name {
+  font-weight: 600;
+  color: #374151;
+}
+
+.milestone-table .status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.milestone-table .status-badge.completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.milestone-table .status-badge.current {
+  background: #fed7aa;
+  color: #92400e;
+}
+
+.milestone-table .status-badge.warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.milestone-table .status-badge.critical {
+  background: #fecaca;
+  color: #991b1b;
+}
+
+.milestone-table .status-badge.overdue {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.milestone-table .status-badge.pending {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.milestone-table td.early {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.milestone-table td.late {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.milestone-table td.on-time {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px 30px;
+  border-top: 2px solid #f3f4f6;
+}
+
+.back-button, .export-button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+
+.back-button {
+  background: white;
+  border: 2px solid #e5e7eb;
+  color: #374151;
+}
+
+.back-button:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.export-button {
+  background: #667eea;
+  border: none;
+  color: white;
+}
+
+.export-button:hover:not(:disabled) {
+  background: #5568d3;
+  transform: translateY(-2px);
+}
+
+.export-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-content {
+    max-height: 95vh;
+  }
+
+  .modal-header {
+    padding: 20px;
+  }
+
+  .quick-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .large-timeline {
+    justify-content: flex-start;
+  }
+
+  .large-milestone {
+    min-width: 100px;
+  }
+
+  .large-milestone-circle {
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+  }
+
+  .milestone-table {
+    font-size: 12px;
+  }
+
+  .milestone-table th,
+  .milestone-table td {
+    padding: 12px 8px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .back-button, .export-button {
+    width: 100%;
+  }
+}

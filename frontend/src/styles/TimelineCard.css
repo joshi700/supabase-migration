@@ -1,0 +1,323 @@
+.timeline-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid;
+  transition: all 0.3s;
+}
+
+.timeline-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.timeline-card.alert-ontrack { border-left-color: #10b981; }
+.timeline-card.alert-warning { border-left-color: #f59e0b; background: #fffbeb; }
+.timeline-card.alert-critical { border-left-color: #ef4444; background: #fef2f2; }
+.timeline-card.alert-overdue { border-left-color: #991b1b; background: #fee2e2; }
+
+/* Card Header */
+.timeline-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.lead-info h3 {
+  font-size: 20px;
+  color: #333;
+  margin: 0 0 4px 0;
+}
+
+.lead-id {
+  font-size: 13px;
+  color: #667eea;
+  font-weight: 600;
+  margin: 0;
+}
+
+.alert-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.alert-badge.alert-ontrack {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.alert-badge.alert-warning {
+  background: #fed7aa;
+  color: #92400e;
+}
+
+.alert-badge.alert-critical {
+  background: #fecaca;
+  color: #991b1b;
+}
+
+.alert-badge.alert-overdue {
+  background: #fee2e2;
+  color: #7f1d1d;
+  animation: pulse 2s infinite;
+}
+
+/* Property Address */
+.property-address {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.address-icon {
+  font-size: 16px;
+}
+
+/* Current Status */
+.current-status {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.status-label {
+  color: #666;
+  font-weight: 500;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #e0e7ff;
+  color: #3730a3;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+/* Progress Section */
+.progress-section {
+  margin-bottom: 20px;
+}
+
+.progress-header {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* Horizontal Timeline */
+.horizontal-timeline {
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding: 20px 0;
+  margin-bottom: 20px;
+  gap: 0;
+}
+
+.timeline-milestone-wrapper {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.timeline-milestone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+  position: relative;
+}
+
+.milestone-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  border: 3px solid;
+  transition: all 0.3s;
+}
+
+.timeline-milestone.milestone-completed .milestone-circle {
+  background: #10b981;
+  border-color: #10b981;
+  color: white;
+}
+
+.timeline-milestone.milestone-current .milestone-circle {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+.timeline-milestone.milestone-warning .milestone-circle {
+  background: white;
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.timeline-milestone.milestone-critical .milestone-circle {
+  background: white;
+  border-color: #ef4444;
+  color: #ef4444;
+  animation: pulse 2s infinite;
+}
+
+.timeline-milestone.milestone-overdue .milestone-circle {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: white;
+  animation: shake 0.5s infinite;
+}
+
+.timeline-milestone.milestone-pending .milestone-circle {
+  background: white;
+  border-color: #d1d5db;
+  color: #9ca3af;
+}
+
+.milestone-info {
+  text-align: center;
+}
+
+.milestone-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+  white-space: nowrap;
+}
+
+.milestone-date {
+  font-size: 10px;
+  color: #666;
+}
+
+.actual-date {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.variance {
+  display: block;
+  font-size: 9px;
+  margin-top: 2px;
+}
+
+.variance.early { color: #10b981; }
+.variance.late { color: #ef4444; }
+
+.days-until {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.days-overdue {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* Timeline Connector */
+.timeline-connector {
+  width: 40px;
+  height: 3px;
+  margin: 0 -8px;
+  margin-top: -30px;
+  position: relative;
+  z-index: -1;
+}
+
+.timeline-connector.completed {
+  background: #10b981;
+}
+
+.timeline-connector.pending {
+  background: #d1d5db;
+}
+
+/* Card Footer */
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.view-details-btn {
+  padding: 10px 20px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.view-details-btn:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+@media (max-width: 768px) {
+  .horizontal-timeline {
+    padding-bottom: 10px;
+  }
+
+  .timeline-milestone {
+    min-width: 80px;
+  }
+
+  .milestone-circle {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
