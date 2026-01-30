@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { supabase } from '../_lib/supabase.js';
+import { createClient } from '@supabase/supabase-js';
 import { cors } from '../_lib/cors.js';
 
 export default async function handler(req, res) {
@@ -17,6 +17,17 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Email and password are required' });
     }
 
+    // Create Supabase client directly
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
+      console.error('Missing env vars');
+      return res.status(500).json({ error: 'Server configuration error' });
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
     const { data: user, error } = await supabase
       .from('users')
       .select('*')
@@ -24,6 +35,7 @@ export default async function handler(req, res) {
       .single();
 
     if (error || !user) {
+      console.error('User lookup failed:', error?.message);
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
