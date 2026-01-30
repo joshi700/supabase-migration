@@ -71,7 +71,7 @@ function Login({ onLogin }) {
         <div className="demo-credentials">
           <p>Demo Credentials:</p>
           <p>Email: admin@realestate.com</p>
-          <p>Password: AdminPass123!</p>
+          <p>Password: admin123</p>
         </div>
       </div>
     </div>
