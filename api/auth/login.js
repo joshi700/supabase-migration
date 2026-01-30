@@ -28,14 +28,20 @@ export default async function handler(req, res) {
 
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    const { data: user, error } = await supabase
+    // Use limit(1) instead of single() to avoid coercion error
+    const { data: users, error } = await supabase
       .from('users')
       .select('*')
       .eq('email', email.toLowerCase())
-      .single();
+      .limit(1);
 
-    if (error || !user) {
+    if (error) {
       console.error('User lookup failed:', error?.message);
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+    const user = users?.[0];
+    if (!user) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
