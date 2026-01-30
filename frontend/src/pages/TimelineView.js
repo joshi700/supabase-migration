@@ -4,7 +4,7 @@ import TimelineCard from '../components/TimelineCard';
 import TimelineDetailModal from '../components/TimelineDetailModal';
 import '../styles/TimelineView.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+const API_URL = process.env.REACT_APP_API_URL || '/api';
 
 function TimelineView({ user }) {
   const [leads, setLeads] = useState([]);

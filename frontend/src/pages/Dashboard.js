@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import TimelineView from './TimelineView';
 import '../styles/Dashboard.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+const API_URL = process.env.REACT_APP_API_URL || '/api';
 
 function BrokerDashboard({ user, onLogout }) {
   const [activeTab, setActiveTab] = useState('overview');

@@ -1,6 +1,19 @@
 {
   "buildCommand": "cd frontend && npm install && npm run build",
   "outputDirectory": "frontend/build",
-  "installCommand": "cd frontend && npm install",
-  "framework": "create-react-app"
+  "installCommand": "npm install",
+  "framework": null,
+  "rewrites": [
+    { "source": "/api/auth/login", "destination": "/api/auth/login" },
+    { "source": "/api/auth/me", "destination": "/api/auth/me" },
+    { "source": "/api/users", "destination": "/api/users/index" },
+    { "source": "/api/users/:id", "destination": "/api/users/[id]" },
+    { "source": "/api/leads", "destination": "/api/leads/index" },
+    { "source": "/api/leads/:id", "destination": "/api/leads/[id]" },
+    { "source": "/api/broker/leads", "destination": "/api/broker/leads" },
+    { "source": "/api/broker/stats", "destination": "/api/broker/stats" },
+    { "source": "/api/timeline/:leadId", "destination": "/api/timeline/[leadId]" },
+    { "source": "/health", "destination": "/api/health" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
